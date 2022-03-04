@@ -1,0 +1,16 @@
+Title: Secure Communication via RF Signal for Data Acquisition
+
+
+The primary motivation of the project is to design a secure wireless communication system. In particular, free RF bands 314MHz, 433MHz, 866MHz, and 915MHz are often used by most commonly used home appliance devices such as various types of remote controls, sensors, smart-home solutions. The data transmission is always one-way (from sensor probe with a transmitter to receiver).
+
+Such a data transfer is the free bandwidth, and not a problem to acquire and read sent data. Possible attacks on such a data transfer are trivial, and data can be easily captured, modified, or resent. It is not possible to verify the origin of the data on the receiver node. The use of RF is particularly advantageous over wired.
+
+Idea is to implement a secure channel by setting up two devices, say Alice(transmitter RPi_1) and Bob(Reciever RPi_2). Let's say Alice wants to send data (M), so the message will be first signed and then encrypted with the public key of Bob to generate ciphertext (C). Now this message will be encoded(ASK, FSK, PSK) based on decided protocol and medium(frequency band) and sent over (RF)-->D/A--> to Bob with the transmitter.
+
+At the receiver's end, Bob will listen for the RF signal, convert A/D--> and the raw RF will be decoded be ciphertext. Bob will use his secret key to decrypt the message and check the MAC with Alice's public key to knowing if this is originally coming from him and he received the message.
+
+Here to send the message over RF, we have two options:
+1. To use the RF board (HackRF/BladeRF --> for transmit and RTL for reception) and do it in a real environment.
+2. If time permits we can try setting up ZeroMQ to transmit RAW RF over TCP with GNUradio, and at receiver, side to map ZeroMQ to a spectrum analyzer and receive RAW RF packets. Everything else remains the same.
+
+The challenge which needs to be addressed: Here in this concept, even though the message is encrypted and signed, let's say if eavesdropper records and replays, the receiver will think the message is signed by Alice and authenticated, for which the solution I can think of is timestamping the messages and decline if it's beyond the time limit.
