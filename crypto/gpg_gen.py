@@ -39,7 +39,7 @@ for i in range(0,10):
 '''
 id = gen_id(emails)
 passphrase = gen_passhphrase()
-
+keyserver = 'keyserver.ubuntu.com'
 print(id)
 print(passphrase)
 
@@ -47,6 +47,7 @@ print(passphrase)
 input_data = pgp.gen_key_input(
     name_email=''.join(id),
     passphrase=''.join(passphrase),
+    keyserver=''.join('')
 )
 key = pgp.gen_key(input_data)
 print(key)
@@ -71,4 +72,29 @@ public = open("public.pem", "w")
 public.write(ascii_armored_public_keys)
 public.close()
 
-system("gpg --send-keys --user {} --keyserver keyserver.ubuntu.com {}".format(id, key))
+'''
+# encrypt
+with open('plain.txt', 'rb') as f:
+    status = pgp.encrypt_file(
+        file=f,
+        recipients=['W5Yalr2lmX@outlook.com'],
+        output='encrypted.txt.gpg',
+    )
+# decrypt
+with open('encrypted.txt.gpg', 'rb') as f:
+    status = pgp.decrypt_file(
+        file=f,
+        passphrase='zrPROvlBefcCGXpuXuskTpSLfwpPrnlwyYzJAdrmmPZhRvPF',
+        output='decrypted.txt',
+    )
+'''
+
+
+
+keylist = pgp.search_keys(
+    "W5Yalr2lmX@outlook.com",
+    "keyserver.ubuntu.com"
+)
+
+#system("gpg --send-keys --user {} --keyserver keyserver.ubuntu.com {}".format(id, key))
+#system("gpg --keyserver keyserver.ubuntu.com --recv-keys {}".format(key))
