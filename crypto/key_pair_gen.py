@@ -43,10 +43,12 @@ input_data = pgp.gen_key_input(
     name_email=''.join(id),
     passphrase=''.join(passphrase),
 )
-key = pgp.gen_key(input_data)
+key = pgp.gen_key(
+    input_data,
+)
 print(key)
 
-# create ascii-readable versions of pub / private keys
+# ascii readable public and private keys
 ascii_armored_public_keys = pgp.export_keys(key.fingerprint)
 ascii_armored_private_keys = pgp.export_keys(
     keyids=key.fingerprint,
@@ -67,23 +69,15 @@ public.write(ascii_armored_public_keys)
 public.close()
 
 
-# decrypt
-with open('encrypted.txt.gpg', 'rb') as f:
-    status = pgp.decrypt_file(
-        file=f,
-        passphrase=''.join(passphrase),
-        output='decrypted.txt',
-    )
-
-
 pgp.send_keys(
     ''.join(keyserver),
     str(key)
 )
 
 f = open("Alice", "w")
-f.write("id" + str(id))
-f.write("passphrase" + str(passphrase))
+f.write("id: " + str(id) + '\n')
+f.write("key id: " + str(key) + '\n')
+f.write("passphrase: " + str(passphrase))
 
 
 #system("gpg --send-keys --user {} --keyserver keyserver.ubuntu.com {}".format(id, key))

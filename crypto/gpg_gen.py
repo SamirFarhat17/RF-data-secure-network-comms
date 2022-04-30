@@ -98,7 +98,7 @@ keylist = pgp.search_keys(
     "keyserver.ubuntu.com"
 )
 
-key_b = pgp.recv_keys(keylist[0]['keyid'])
-
+key_bob = pgp.recv_keys(keylist[0]['keyid'])
+print(keylist[len(keylist)-1]['keyid'])
 #system("gpg --send-keys --user {} --keyserver keyserver.ubuntu.com {}".format(id, key))
 #system("gpg --keyserver keyserver.ubuntu.com --recv-keys {}".format(key))
