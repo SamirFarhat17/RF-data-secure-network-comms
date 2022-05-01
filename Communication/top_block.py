@@ -204,10 +204,11 @@ class top_block(grc_wxgui.top_block_gui):
 def main(top_block_cls=top_block, options=None):
 
     tb = top_block_cls()
-    tb.Start(True)
+    tb.run(10)
+    '''tb.Start(True)
     tb.wait()
     #time.sleep(10)
-    #tb.stop()
+    #tb.stop()'''
 
 
 if __name__ == '__main__':

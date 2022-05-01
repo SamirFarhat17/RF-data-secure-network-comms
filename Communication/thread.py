@@ -12,5 +12,7 @@ t.daemon = True               # Python will exit when the main thread
                               # running
 t.start()
 
-snooziness = int(15)
+snooziness = int(5)
 sleep(snooziness)
+print("\n\n\n\n\n\nhi\n\n\n\n\n\n\n\n")
+os.startfile("thread_test.py")
