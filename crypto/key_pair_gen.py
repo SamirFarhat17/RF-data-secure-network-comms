@@ -1,6 +1,7 @@
 import random
 import string
 import gnupg
+from isort import file
 pgp = gnupg.GPG()
 from os import system
 
@@ -47,7 +48,7 @@ key = pgp.gen_key(
     input_data,
 )
 print(key)
-
+print(len(pgp.list_keys()))
 # ascii readable public and private keys
 ascii_armored_public_keys = pgp.export_keys(key.fingerprint)
 ascii_armored_private_keys = pgp.export_keys(
@@ -68,7 +69,6 @@ public = open("public.pem", "w")
 public.write(ascii_armored_public_keys)
 public.close()
 
-
 pgp.send_keys(
     ''.join(keyserver),
     str(key)
@@ -79,6 +79,6 @@ f.write("id: " + str(id) + '\n')
 f.write("key id: " + str(key) + '\n')
 f.write("passphrase: " + str(passphrase))
 
-
+print(len(pgp.list_keys()))
 #system("gpg --send-keys --user {} --keyserver keyserver.ubuntu.com {}".format(id, key))
 #system("gpg --keyserver keyserver.ubuntu.com --recv-keys {}".format(key))

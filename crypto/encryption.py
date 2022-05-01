@@ -14,7 +14,6 @@ with open('plain.txt', 'rb') as f:
         recipients=id,
         output='encrypted.txt.gpg',
     )
-print( 'ok: ', status.ok)
+print('ok: ', status.ok)
 print('status: ', status.status)
 print('stderr: ', status.stderr)
-
