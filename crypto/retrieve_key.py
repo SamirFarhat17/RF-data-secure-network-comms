@@ -3,6 +3,7 @@ from nbformat import write
 pgp = gnupg.GPG()
 from os import system
 
+print(len(pgp.list_keys()))
 read_bob = open('Bob', 'r')
 id = read_bob.readlines()[0].replace("id: ", '')
 id.replace('\n', '')
@@ -37,3 +38,8 @@ export_result = pgp.export_keys(keylist[len(keylist)-1]['keyid'])
 
 print(len(pgp.list_keys()))
 #system("gpg --export --armor {} | sudo apt-key add - && sudo apt-get update".format(keylist[0]['fingerprint']))
+#system("gpg --edit-key {}".format(keylist[len(keylist)-1]['keyid']))
+my_key_list = pgp.list_keys()
+fingerprint = my_key_list[len(my_key_list)-1]['fingerprint']
+print(fingerprint)
+pgp.trust_keys(fingerprint, "TRUST_ULTIMATE")
