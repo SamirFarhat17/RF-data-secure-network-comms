@@ -1,12 +1,9 @@
-import sys
 import random
 import string
 import gnupg
 pgp = gnupg.GPG()
 from os import system
-
-
-print(sys.argv)
+import sys
 emails = [
     "@protonmail.com",
     "@gmail.com",
@@ -16,7 +13,7 @@ emails = [
     "@godaddy.com",
     "@outlook.com"
 ]
-
+print(sys.argv)
 def gen_email_ending(emails):
     return random.choice(emails)
 
@@ -36,7 +33,7 @@ def gen_passhphrase():
     return passphrase
 
 #id = gen_id(emails)
-id = sys.argv[2]
+id = sys.argv[1]
 passphrase = gen_passhphrase()
 keyserver = 'keyserver.ubuntu.com'
 print(id)

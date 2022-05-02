@@ -18,7 +18,7 @@ keylist = pgp.search_keys(
 )
 
 recv_bob = pgp.recv_keys(
-        'keyserver.ubuntu.com', 
+        'keyserver.ubuntu.com',
         ''.join(keylist[len(keylist)-1]['keyid'])
 )
 print(keylist[len(keylist)-1]['keyid'])
@@ -35,6 +35,8 @@ with open('bob_pub.pem', 'w') as f:
 
 key_bob = pgp.recv_keys(keylist[0]['keyid'])
 export_result = pgp.export_keys(keylist[len(keylist)-1]['keyid'])
+import_result = pgp.import_keys(keylist[len(keylist)-1]['keyid'])
+pgp.import_keys("bob_pub.pem")
 
 print(len(pgp.list_keys()))
 #system("gpg --export --armor {} | sudo apt-key add - && sudo apt-get update".format(keylist[0]['fingerprint']))
