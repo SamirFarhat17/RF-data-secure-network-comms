@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
@@ -33,8 +33,6 @@ from optparse import OptionParser
 import osmosdr
 import time
 import wx
-import os
-import sys
 
 
 class top_block(grc_wxgui.top_block_gui):
@@ -150,11 +148,7 @@ class top_block(grc_wxgui.top_block_gui):
         	verbose=False,
         	log=False,
         )
-        if os.path.exists("Rx.txt"):
-            os.remove("Rx.txt")
-        receiver = open("Rx.txt", "w")
-        curr_path = os.path.abspath('Rx.txt')
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, curr_path, False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, 'C:\\Users\\samir\\OneDrive\\Desktop\\Boston University\\Spring_2022\\EC544\\RF-data-secure-network-comms\\Demo\\recv\\Rx.txt', False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blks2_packet_decoder_0 = grc_blks2.packet_demod_f(grc_blks2.packet_decoder(
         		access_code='',
@@ -204,11 +198,8 @@ class top_block(grc_wxgui.top_block_gui):
 def main(top_block_cls=top_block, options=None):
 
     tb = top_block_cls()
-    tb.run(10)
-    '''tb.Start(True)
-    tb.wait()
-    #time.sleep(10)
-    #tb.stop()'''
+    tb.Start(True)
+    tb.Wait()
 
 
 if __name__ == '__main__':

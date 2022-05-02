@@ -1,7 +1,6 @@
 import random
 import string
 import gnupg
-from isort import file
 pgp = gnupg.GPG()
 from os import system
 
