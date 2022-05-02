@@ -12,7 +12,7 @@ with open('plain.txt', 'rb') as f:
     status = pgp.encrypt_file(
         file=f,
         recipients=id,
-        output='encrypted.txt.gpg',
+        output='encrypted.gpg.txt',
     )
 print('ok: ', status.ok)
 print('status: ', status.status)

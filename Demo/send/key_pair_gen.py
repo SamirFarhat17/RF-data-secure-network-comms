@@ -3,7 +3,7 @@ import string
 import gnupg
 pgp = gnupg.GPG()
 from os import system
-
+import sys
 emails = [
     "@protonmail.com",
     "@gmail.com",
@@ -13,7 +13,7 @@ emails = [
     "@godaddy.com",
     "@outlook.com"
 ]
-
+print(sys.argv)
 def gen_email_ending(emails):
     return random.choice(emails)
 
