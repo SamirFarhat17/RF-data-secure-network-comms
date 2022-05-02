@@ -55,7 +55,9 @@ class top_block(gr.top_block):
         	verbose=False,
         	log=False,
         )
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, 'C:\\Users\\RAJAT\\Desktop\\GMSK_RX_demo.txt', False)
+
+        path = "C:\Users\samir\OneDrive\Desktop\Boston University\Spring_2022\EC544\RF-data-secure-network-comms\Demo\recv\Rx.txt"
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_float*1, "C:\\Users\\samir\\OneDrive\\Desktop\\Boston University\\Spring_2022\\EC544\\RF-data-secure-network-comms\\Demo\\recv\\Rx.txt", False)
         self.blocks_file_sink_0.set_unbuffered(True)
         self.blks2_packet_decoder_0 = grc_blks2.packet_demod_f(grc_blks2.packet_decoder(
         		access_code='',
